@@ -3,3 +3,4 @@
 ^Meta$
 .RData
 .Rhistory
+.travis.yml
