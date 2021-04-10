@@ -1,11 +1,11 @@
 #' Read local FARS data
-#' 
+#'
 #' \code{fars_read} reads data from the US National Highway
 #' Traffic Safety Administration's Fatality Analysis Reporting
 #' System (FARS), which is a nationwide census providing the
 #' American public yearly data regarding fatal injuries suffered
 #' in motor vehicle traffic crashes.
-#' 
+#'
 #' @param filename Path to a FARS csv file (optionally compressed).
 #' @return A tibble representing the FARS data or an error
 #'   if the file does not exist.
@@ -30,7 +30,7 @@ fars_read <- function(filename) {
 
 
 #' Create a filename for FARS accident data for a given year.
-#' 
+#'
 #' @param year Year of accident data.
 #' @return filename of accident data, e.g. "accident_2015.csv.bz2".
 #' @examples
@@ -44,9 +44,9 @@ make_filename <- function(year) {
 
 
 #' Read multiple years of FARS data.
-#' 
+#'
 #' \code{fars_read_years} will read all the given years of FARS data.
-#' 
+#'
 #' @param years Vector or list of years to read.
 #' @return A list of tibbles representing FARS data. If data for a year is
 #'   missing, an empty list element is returned together with a warning.
@@ -54,7 +54,7 @@ make_filename <- function(year) {
 #' \dontrun{
 #'   fars_read_years(c(2015, 2016))
 #' }
-#' 
+#'
 #' @importFrom dplyr mutate select
 #' @importFrom magrittr `%>%`
 #' @importFrom rlang .data
@@ -76,10 +76,10 @@ fars_read_years <- function(years) {
 
 
 #' Number of fatal injuries per month and year.
-#' 
+#'
 #' \code{fars_summarize_years} summarizes FARS data for the given years
 #' into the number of fatal injuries per month and year.
-#' 
+#'
 #' @param years Vector or list of years to read.
 #' @return A tibble of monthly accidents per month and year.
 #' @examples
@@ -102,10 +102,10 @@ fars_summarize_years <- function(years) {
 
 
 #' Show locations of fatal injuries in a given state and during a given year.
-#' 
+#'
 #' \code{fars_map_state} shows locations of the fatal injuries for a given
 #' state and year on a map.
-#' 
+#'
 #' @param state.num The number of the state to show locations from.
 #' @param year The year for which to show locations of fatal injuries.
 #' @return A map / a plot or an error if there were no fatal injuries to show.
@@ -113,7 +113,7 @@ fars_summarize_years <- function(years) {
 #' \dontrun{
 #' fars_map_state(1, 2015)
 #' }
-#' 
+#'
 #' @importFrom dplyr filter
 #' @importFrom graphics points
 #' @importFrom magrittr `%>%`
@@ -124,7 +124,7 @@ fars_map_state <- function(state.num, year) {
   filename <- make_filename(year)
   data <- fars_read(filename)
   state.num <- as.integer(state.num)
-  
+
   if (!(state.num %in% unique(data$STATE)))
     stop("invalid STATE number: ", state.num)
   data.sub <- data %>% dplyr::filter(.data$STATE == state.num)
