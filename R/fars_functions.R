@@ -135,6 +135,5 @@ fars_map_state <- function(state.num, year) {
   is.na(data.sub$LONGITUD) <- data.sub$LONGITUD > 900
   is.na(data.sub$LATITUDE) <- data.sub$LATITUDE > 90
   maps::map("state", regions = datasets::state.name[state.num])
-  data.sub %>%
-    graphics::points(.data$LONGITUD, .data$LATITUDE, pch = 46)
+  graphics::points(data.sub$LONGITUD, data.sub$LATITUDE, pch = 46)
 }
