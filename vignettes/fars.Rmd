@@ -1,0 +1,52 @@
+---
+title: "FARS functions"
+output: rmarkdown::html_vignette
+description: This vignette provides a brief overview of the FARS
+  functionality.
+vignette: >
+  %\VignetteIndexEntry{FARS functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(courserafars)
+knitr::opts_knit$set(root.dir = system.file("extdata", package = "courserafars"))
+```
+
+## `fars_read()`: Read FARS data from file
+
+```{r}
+fars_read("accident_2015.csv.bz2")
+```
+
+## `make_filename()`: Create a filename for a year of FARS data
+
+```{r}
+make_filename(2015)
+```
+
+## `fars_read_years()`: Reads multiple years of FARS data
+
+```{r}
+fars_read_years(2013:2015)
+```
+
+## `fars_summarize_years()`: Monthly summary of FARS data
+
+```{r}
+fars_summarize_years(2013:2015)
+```
+
+## `fars_map_state()`: Maps FARS data on a map by state and year
+
+```{r}
+fars_map_state(1, 2015)
+```
